@@ -38,6 +38,7 @@ public class Mines : MonoBehaviour
             if (sliderTimer >= timerRessource)
             {
                 GameManager.Instance.IncrementGold(numberRessource);
+                Debug.Log(numberRessource);
                 Vector3 position = transform.position;
                 float angle = (3.0f + (rotation * 2)) * Mathf.PI / 6;
                 position.y += Mathf.Sin(angle) * 0.6f;

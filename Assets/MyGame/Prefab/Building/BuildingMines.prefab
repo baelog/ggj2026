@@ -105,6 +105,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Building
   cost: 20
-  type: 13
+  type: 11
   placeTerrain: 1
   factory: {fileID: 7264709449112319007, guid: 1bc093c771bb23d4390aa33d134709c8, type: 3}

@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
     public GameObject previewInstance;
     private Camera mainCamera;
     public int rotation;
+    private bool deleteTile;
 
     void Start()
     {
@@ -54,6 +56,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             StopPreview();
+            deleteTile = false;
         }
         if (buildingToPlace != null)
         {
@@ -66,6 +69,13 @@ public class GameManager : MonoBehaviour
             }
             UpdateHover(worldPos);
         }
+        if (deleteTile == true)
+        {
+            Vector3 worldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            worldPos.z = 0;
+
+            UpdateHoverDelete(worldPos);
+        }
     }
 
     void StopPreview()
@@ -73,6 +83,7 @@ public class GameManager : MonoBehaviour
         ClearOverlay();
         buildingToPlace = null;
         previewInstance.SetActive(false);
+        SetMenuActive.Instance.hideElement();
     }
 
     void InitGrid()
@@ -108,9 +119,9 @@ public class GameManager : MonoBehaviour
     {
         Vector3Int cellPos = groundTilemap.WorldToCell(worldPos);
 
+
         if (build)
         {
-            Debug.Log(cells[cellPos].isOccupied);
             if (cells[cellPos].isOccupied == buildingToPlace.placeTerrain && gold >= buildingToPlace.cost)
             {
                 builddingTile = ScriptableObject.CreateInstance<Tile>();
@@ -119,13 +130,36 @@ public class GameManager : MonoBehaviour
                 builddingTile.color = builddingTileTemp.color;
                 cells[cellPos].isOccupied = buildingToPlace.type;
                 buldingTilemap.SetTile(cellPos, builddingTile);
-                Debug.Log(buldingTilemap.CellToWorld(cellPos));
-                Debug.Log(cellPos);
                 buildingToPlace.createBuilding(buldingTilemap.CellToWorld(cellPos));
                 gold -= buildingToPlace.cost;
             }
             build = false;
+        } 
+        else 
+        {
+            if (!cells.ContainsKey(cellPos))
+            {
+                ClearOverlay();
+                return;
+            }
+
+            if (hasLastCell && cellPos == lastHoveredCell) return;
+
+            ClearOverlay();
+
+            overlayTilemap.SetTile(
+                cellPos,
+                cells[cellPos].isOccupied != buildingToPlace.placeTerrain ? occupiedTile : freeTile
+            );
+
+            lastHoveredCell = cellPos;
+            hasLastCell = true;
         }
+    }
+
+    public void UpdateHoverDelete(Vector3 worldPos)
+    {
+        Vector3Int cellPos = groundTilemap.WorldToCell(worldPos);
 
         if (!cells.ContainsKey(cellPos))
         {
@@ -137,10 +171,17 @@ public class GameManager : MonoBehaviour
 
         ClearOverlay();
 
-        overlayTilemap.SetTile(
-            cellPos,
-            cells[cellPos].isOccupied != buildingToPlace.placeTerrain ? occupiedTile : freeTile
-        );
+        if (Input.GetMouseButtonDown(0) && cells[cellPos].isOccupied <= 10)
+        {
+            Debug.Log(cells[cellPos].isOccupied);
+            cells[cellPos].isOccupied -= 10;
+            buldingTilemap.SetTile(cellPos, null);
+            Debug.Log(buldingTilemap.ToString());
+        }
+        else
+        {
+            overlayTilemap.SetTile(cellPos, occupiedTile);
+        }
 
         lastHoveredCell = cellPos;
         hasLastCell = true;
@@ -172,5 +213,12 @@ public class GameManager : MonoBehaviour
     public void Rotate()
     {
         rotation++;
+    }
+
+    public void Delete()
+    {
+        buildingToPlace = null;
+        deleteTile = true;
+        previewInstance.SetActive(false);
     }
 }
