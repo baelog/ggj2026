@@ -17,7 +17,7 @@ public class ObjectMoving : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("entre");
+        //Debug.Log("entre");
         if (other.tag == Tags.Belt)
         {
 
@@ -33,8 +33,8 @@ public class ObjectMoving : MonoBehaviour
             collisionCount--;
         }
         //collisionCount--;
-        Debug.Log("colision enter");
-        Debug.Log(collisionCount);
+        //Debug.Log("colision enter");
+        //Debug.Log(collisionCount);
         if (collisionCount == 0)
         {
             Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();

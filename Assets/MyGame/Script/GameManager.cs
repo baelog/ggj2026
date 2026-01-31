@@ -119,6 +119,8 @@ public class GameManager : MonoBehaviour
                 builddingTile.color = builddingTileTemp.color;
                 cells[cellPos].isOccupied = buildingToPlace.type;
                 buldingTilemap.SetTile(cellPos, builddingTile);
+                Debug.Log(buldingTilemap.CellToWorld(cellPos));
+                Debug.Log(cellPos);
                 buildingToPlace.createBuilding(buldingTilemap.CellToWorld(cellPos));
                 gold -= buildingToPlace.cost;
             }

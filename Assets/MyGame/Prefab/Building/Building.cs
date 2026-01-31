@@ -9,9 +9,10 @@ public class Building : MonoBehaviour
     public int placeTerrain;
     public GameObject factory;
 
-    public void createBuilding(Vector3 position)
+    public void createBuilding(Vector3 positionb)
     {
-        GameObject newfactory = Instantiate(factory, position, Quaternion.identity);
+        Debug.Log(positionb);
+        GameObject newfactory = Instantiate(factory, positionb, Quaternion.identity);
         newfactory.transform.Find("Out").Rotate(0, 0, 60 * GameManager.Instance.rotation);
     }
 }

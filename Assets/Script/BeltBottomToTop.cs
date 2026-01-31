@@ -17,6 +17,7 @@ public class BeltBottomToTop : Ibelt
     // Use this for initialization
     protected override void Start()
     {
+        rotation = GameManager.Instance.rotation;
         transform.rotation = Quaternion.Euler(0, 0, 60 * rotation);
         float angle = (3.0f + (rotation * 2)) * Mathf.PI / 6;
         outDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
