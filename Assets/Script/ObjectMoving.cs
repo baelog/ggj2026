@@ -7,6 +7,32 @@ public class ObjectMoving : MonoBehaviour
      * Speed
      * </summary>
      */
+    private int collisionCount = 0;
+    private Rigidbody thisRb;
+
+    public bool IsNotColliding
+    {
+        get { return collisionCount == 0; }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("entre");
+        collisionCount++;
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        collisionCount--;
+        Debug.Log("colision enter");
+        Debug.Log(collisionCount);
+        if (collisionCount == 0)
+        {
+            Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
+            rb.linearVelocity = new Vector2(0,0);
+        }
+    }
+
     private float _speed = 1;
 
     public float speed
