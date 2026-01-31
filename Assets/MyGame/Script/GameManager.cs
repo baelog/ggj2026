@@ -85,9 +85,23 @@ public class GameManager : MonoBehaviour
 
             cells[pos] = new CellData
             {
-                isOccupied = groundTilemap.GetTile(pos).name == "HexagonGreen" ? 0 : 2
+                isOccupied = GetTypeTerrain(groundTilemap.GetTile(pos).name)
             };
         }
+    }
+
+    private int GetTypeTerrain(string nameCell)
+    {
+        switch (nameCell)
+        {
+            case "HexagonGreen":
+                return 0;
+            case "HexagonBrown":
+                return 1;
+            case "HexagonBlue":
+                return 2;
+        }
+        return -1;
     }
 
     public void UpdateHover(Vector3 worldPos)
@@ -96,19 +110,17 @@ public class GameManager : MonoBehaviour
 
         if (build)
         {
-            if (cells[cellPos].isOccupied == 0 && gold >= buildingToPlace.cost)
+            Debug.Log(cells[cellPos].isOccupied);
+            if (cells[cellPos].isOccupied == buildingToPlace.placeTerrain && gold >= buildingToPlace.cost)
             {
                 builddingTile = ScriptableObject.CreateInstance<Tile>();
                 var builddingTileTemp = buildingToPlace.GetComponent<SpriteRenderer>();
                 builddingTile.sprite = builddingTileTemp.sprite;
                 builddingTile.color = builddingTileTemp.color;
-                cells[cellPos].isOccupied = 1;
+                cells[cellPos].isOccupied = buildingToPlace.type;
                 buldingTilemap.SetTile(cellPos, builddingTile);
-                GameObject newfactory = Instantiate(factory, buldingTilemap.CellToWorld(cellPos), Quaternion.identity);
-                newfactory.transform.Find("Out").Rotate(0, 0, 60 * rotation);
+                buildingToPlace.createBuilding(buldingTilemap.CellToWorld(cellPos));
                 gold -= buildingToPlace.cost;
-                //StopPreview();
-                //return;
             }
             build = false;
         }
@@ -125,7 +137,7 @@ public class GameManager : MonoBehaviour
 
         overlayTilemap.SetTile(
             cellPos,
-            cells[cellPos].isOccupied != 0 ? occupiedTile : freeTile
+            cells[cellPos].isOccupied != buildingToPlace.placeTerrain ? occupiedTile : freeTile
         );
 
         lastHoveredCell = cellPos;
@@ -150,6 +162,10 @@ public class GameManager : MonoBehaviour
     public void IncrementMask(int numberAdd)
     {
         mask += numberAdd;
+    }
+    public void IncrementGold(int numberAdd)
+    {
+        gold += numberAdd;
     }
     public void Rotate()
     {
