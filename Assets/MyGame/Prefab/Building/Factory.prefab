@@ -511,7 +511,7 @@ MonoBehaviour:
   timerMask: 2
   numberMask: 1
   timerSlider: {fileID: 3273919581630280442}
-  ressource: {fileID: 3139859303130691054, guid: cd4d4b56b09c2e74dad484ca4abe8fd5, type: 3}
+  ressource: {fileID: 507176380533051724, guid: f6843d8ca5646d746bcd9c3f79e83802, type: 3}
 --- !u!1 &8191996923270394470
 GameObject:
   m_ObjectHideFlags: 0

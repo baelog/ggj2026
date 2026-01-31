@@ -18,12 +18,21 @@ public class ObjectMoving : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("entre");
-        collisionCount++;
+        if (other.tag == Tags.Belt)
+        {
+
+            collisionCount++;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        collisionCount--;
+        if (other.tag == Tags.Belt)
+        {
+
+            collisionCount--;
+        }
+        //collisionCount--;
         Debug.Log("colision enter");
         Debug.Log(collisionCount);
         if (collisionCount == 0)
