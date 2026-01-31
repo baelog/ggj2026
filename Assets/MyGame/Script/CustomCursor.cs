@@ -3,20 +3,6 @@ using UnityEngine.UIElements;
 
 public class CustomCursor : MonoBehaviour
 {
-    public GameObject objectPrefab;
-
-    public float rotationStep = 15f;
-
-    private GameObject previewInstance;
-    private Camera mainCamera;
-    private float currentYRotation = 0f;
-    void Start()
-    {
-        mainCamera = Camera.main;
-        previewInstance = Instantiate(objectPrefab);
-        previewInstance.SetActive(false);
-    }
-
     void Update()
     {
         HandlePreview();
@@ -25,22 +11,17 @@ public class CustomCursor : MonoBehaviour
 
     void HandlePreview()
     {
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit))
-        {
-            if (!previewInstance.activeInHierarchy)
-                previewInstance.SetActive(true);
-
-            previewInstance.transform.position = hit.point;
-            previewInstance.transform.rotation = Quaternion.Euler(0, currentYRotation, 0);
-        }
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = -1;
+        transform.position = mousePosition;
+        transform.rotation = Quaternion.Euler(0, 0, 60 * GameManager.Instance.rotation);
     }
 
     void HandleRotation()
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            currentYRotation += rotationStep;
+            GameManager.Instance.Rotate();
         }
     }
 }

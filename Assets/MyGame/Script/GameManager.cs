@@ -32,21 +32,19 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
 
-    public GameObject objectPrefab;
-
-    public float rotationStep = 60f;
-
-    private GameObject previewInstance;
+    public GameObject previewInstance;
     private Camera mainCamera;
-    private float currentYRotation = 0f;
+    public int rotation;
 
     void Start()
     {
         gold = 100;
+        rotation = 0;
         InitGrid();
         overlayTilemap.ClearAllTiles();
         Instance = this;
         mainCamera = Camera.main;
+        previewInstance.SetActive(false);
     }
 
     void Update()
@@ -55,8 +53,7 @@ public class GameManager : MonoBehaviour
         maskDisplay.text = "Mask: " + mask.ToString();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            ClearOverlay();
-            buildingToPlace = null;
+            StopPreview();
         }
         if (buildingToPlace != null)
         {
@@ -68,36 +65,14 @@ public class GameManager : MonoBehaviour
                 build = true;
             }
             UpdateHover(worldPos);
-            HandlePreview();
-            HandleRotation();
         }
     }
 
-    void StopHandlePreview()
+    void StopPreview()
     {
+        ClearOverlay();
+        buildingToPlace = null;
         previewInstance.SetActive(false);
-        Destroy(previewInstance);
-    }
-
-    void HandlePreview()
-    {
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit))
-        {
-            if (!previewInstance.activeInHierarchy)
-                previewInstance.SetActive(true);
-
-            previewInstance.transform.position = hit.point;
-            previewInstance.transform.rotation = Quaternion.Euler(0, currentYRotation, 0);
-        }
-    }
-
-    void HandleRotation()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            currentYRotation += rotationStep;
-        }
     }
 
     void InitGrid()
@@ -129,9 +104,11 @@ public class GameManager : MonoBehaviour
                 builddingTile.color = builddingTileTemp.color;
                 cells[cellPos].isOccupied = 1;
                 buldingTilemap.SetTile(cellPos, builddingTile);
-                Instantiate(factory, buldingTilemap.CellToWorld(cellPos), Quaternion.identity);
+                GameObject newfactory = Instantiate(factory, buldingTilemap.CellToWorld(cellPos), Quaternion.identity);
+                newfactory.transform.Find("Out").Rotate(0, 0, 60 * rotation);
                 gold -= buildingToPlace.cost;
-                StopHandlePreview();
+                //StopPreview();
+                //return;
             }
             build = false;
         }
@@ -166,13 +143,16 @@ public class GameManager : MonoBehaviour
         if (gold >= building.cost)
         {
             buildingToPlace = building;
-            previewInstance = Instantiate(objectPrefab);
-            previewInstance.SetActive(false);
+            previewInstance.SetActive(true);
         }
     }
 
     public void IncrementMask(int numberAdd)
     {
         mask += numberAdd;
+    }
+    public void Rotate()
+    {
+        rotation++;
     }
 }
