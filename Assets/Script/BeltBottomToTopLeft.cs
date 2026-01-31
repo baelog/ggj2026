@@ -20,7 +20,7 @@ public class BeltBottomToTopLeft : Ibelt
         outDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
         base.Start();
         id = inc;
-        Debug.Log(id);
+        //Debug.Log(id);
     }
 
     // Update is called once per frame
