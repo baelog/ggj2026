@@ -8,28 +8,16 @@ public abstract class Ibelt : MonoBehaviour
     * </summary>
     */
     protected float speed = 5f;
+    protected static int inc = 0;
 
     // Use this for initialization
     protected virtual void Start()
     {
-
+        inc++;
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
-        this.WatchForItem();
     }
-
-    /**
-     * <summary>
-     * Watch for any item on top of the belt,
-     * if there is, move it.
-     * </summary>
-     *
-     * <returns>
-     * void
-     * </returns>
-     */
-    protected abstract void WatchForItem();
 }

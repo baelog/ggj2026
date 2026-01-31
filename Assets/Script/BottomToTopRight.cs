@@ -1,15 +1,12 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
-
-public class BeltBottomToTop : Ibelt
+public class BottomToTopRight : Ibelt
 {
-
     public float moveSpeed = 2f;
     public float centerThreshold = 0.05f;
     public float rotation = 0f;
     private int id;
+
 
     // Top-left direction (pointy-top hex)
     private Vector2 outDirection;
@@ -18,7 +15,7 @@ public class BeltBottomToTop : Ibelt
     protected override void Start()
     {
         transform.rotation = Quaternion.Euler(0, 0, 60 * rotation);
-        float angle = (3.0f + (rotation * 2)) * Mathf.PI / 6;
+        float angle = (1.0f + (rotation * 2)) * Mathf.PI / 6;
         outDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
         base.Start();
         id = inc;
@@ -48,7 +45,7 @@ public class BeltBottomToTop : Ibelt
         {
             //if (states == 0)
             //{
-                rb.linearVelocity = toCenter.normalized * moveSpeed;
+            rb.linearVelocity = toCenter.normalized * moveSpeed;
             //}
         }
         // Once centered  move out
@@ -58,5 +55,4 @@ public class BeltBottomToTop : Ibelt
             itemBehaviour.pullingBelt = id;
         }
     }
-
 }

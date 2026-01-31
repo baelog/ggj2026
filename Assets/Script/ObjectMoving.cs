@@ -21,6 +21,20 @@ public class ObjectMoving : MonoBehaviour
             return this._speed;
         }
     }
+    private float _pullingBelt = 0;
+
+    public float pullingBelt
+    {
+        set
+        {
+            this._pullingBelt = value;
+        }
+
+        get
+        {
+            return this._pullingBelt;
+        }
+    }
 
     /**
      * <summary>

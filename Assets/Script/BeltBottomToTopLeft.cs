@@ -2,10 +2,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-
-public class BeltBottomToTop : Ibelt
+public class BeltBottomToTopLeft : Ibelt
 {
-
     public float moveSpeed = 2f;
     public float centerThreshold = 0.05f;
     public float rotation = 0f;
@@ -18,7 +16,7 @@ public class BeltBottomToTop : Ibelt
     protected override void Start()
     {
         transform.rotation = Quaternion.Euler(0, 0, 60 * rotation);
-        float angle = (3.0f + (rotation * 2)) * Mathf.PI / 6;
+        float angle = (5.0f + (rotation * 2)) * Mathf.PI / 6;
         outDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
         base.Start();
         id = inc;
@@ -33,6 +31,7 @@ public class BeltBottomToTop : Ibelt
 
     private void OnTriggerStay2D(Collider2D other)
     {
+        //Debug.Log("ca touche");
         Rigidbody2D rb = other.attachedRigidbody;
         if (rb == null || other.tag != Tags.Item) return;
 
@@ -48,7 +47,7 @@ public class BeltBottomToTop : Ibelt
         {
             //if (states == 0)
             //{
-                rb.linearVelocity = toCenter.normalized * moveSpeed;
+            rb.linearVelocity = toCenter.normalized * moveSpeed;
             //}
         }
         // Once centered  move out
@@ -58,5 +57,4 @@ public class BeltBottomToTop : Ibelt
             itemBehaviour.pullingBelt = id;
         }
     }
-
 }

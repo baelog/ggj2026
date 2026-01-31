@@ -990,6 +990,7 @@ GameObject:
   - component: {fileID: 1407351059}
   - component: {fileID: 1407351060}
   - component: {fileID: 1407351061}
+  - component: {fileID: 1407351062}
   m_Layer: 0
   m_Name: movable
   m_TagString: Item
@@ -1006,7 +1007,7 @@ Transform:
   m_GameObject: {fileID: 1407351057}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.105, y: 0.045, z: 0}
+  m_LocalPosition: {x: -6, y: -0.45, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1062,7 +1063,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0.91711557, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.6150943, b: 0.03782908, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1101,7 +1102,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -1129,6 +1130,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f4e64e794835d74cbc63cd1a5683fec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectMoving
+--- !u!50 &1407351062
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1407351057}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!1 &1445708290
 GameObject:
   m_ObjectHideFlags: 0
@@ -1763,7 +1791,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -1798,6 +1826,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 320cbb3a52a52e04f847b3623631a410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BeltBottomToTop
+  moveSpeed: 3
+  centerThreshold: 0.05
+  rotation: 0
 --- !u!50 &1930909855
 Rigidbody2D:
   serializedVersion: 5
@@ -1807,13 +1838,13 @@ Rigidbody2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1930909850}
   m_BodyType: 0
-  m_Simulated: 0
+  m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1822,8 +1853,8 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!1 &2017924485
 GameObject:
