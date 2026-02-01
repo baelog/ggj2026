@@ -127,11 +127,11 @@ public class GameManager : MonoBehaviour
     {
         switch (nameCell)
         {
-            case "HexagonGreen":
+            case "base_01":
                 return 0;
-            case "HexagonBrown":
+            case "base_stone_01":
                 return 1;
-            case "HexagonBlue":
+            case "base_water_01":
                 return 2;
         }
         return -1;
