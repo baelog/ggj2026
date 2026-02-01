@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8959101707816809879}
   - component: {fileID: 7437668563009667687}
   m_Layer: 0
-  m_Name: Building
+  m_Name: build forge iron
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -712631045867808456, guid: b670ab75dde984907b8570040daa08c5, type: 3}
-  m_Color: {r: 0.4117647, g: 0.4117647, b: 0.4117647, a: 1}
+  m_Color: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7410e88dad365e14394614c843a43f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Building
-  cost: 10
-  type: 12
-  placeTerrain: 2
-  factory: {fileID: 7264709449112319007, guid: 9709119dbf2e76e4abb0c9ad08993277, type: 3}
+  cost: 50
+  type: 10
+  placeTerrain: 0
+  factory: {fileID: 1760320043767646991, guid: ecd8025f51127ff41a72fcad609c3bba, type: 3}

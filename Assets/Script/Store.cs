@@ -12,11 +12,24 @@ public class Store : MonoBehaviour
         switch (itemBehaviour.name)
         {
             case "Rock Mask":
-                GameManager.Instance.IncrementGold(3);
-                GameManager.Instance.IncrementMask(1);
+                GameManager.Instance.IncrementGold(1);
+                GameManager.Instance.IncrementStoneMask(1);
                 break;
             case "Iron Mask":
+                GameManager.Instance.IncrementIronMask(1);
+                GameManager.Instance.IncrementGold(5);
+                break;
+            case "Prismarine Mask":
+                GameManager.Instance.IncrementPrismarineMask(1);
                 GameManager.Instance.IncrementGold(10);
+                break;
+            case "Light Prismarine Mask":
+                GameManager.Instance.IncrementLightPrismarineMask(1);
+                GameManager.Instance.IncrementGold(25);
+                break;
+            case "Solidified Prismarine Mask":
+                GameManager.Instance.IncrementSolidifiedPrismarineMask(1);
+                GameManager.Instance.IncrementGold(50);
                 break;
             default:
                 // code block

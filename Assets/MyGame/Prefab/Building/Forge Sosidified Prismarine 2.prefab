@@ -135,11 +135,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7539269285233990959}
   - component: {fileID: 3149806738557036480}
-  - component: {fileID: 4393186667363881643}
   - component: {fileID: 7890168745951659043}
   - component: {fileID: 3026412996693644427}
+  - component: {fileID: 6902816596571374898}
   m_Layer: 0
-  m_Name: Forge
+  m_Name: Forge Sosidified Prismarine 2
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -221,22 +221,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &4393186667363881643
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1760320043767646991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b36b3feaa392504881f84169e6d52b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Forge
-  ressource: {fileID: 507176380533051724, guid: 043e5e69c3fc8f14aa51d34dd5150f85, type: 3}
-  timerRessource: 0.5
-  numberRessource: 1
-  timerSlider: {fileID: 5179089128947799250}
 --- !u!60 &7890168745951659043
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -317,6 +301,22 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &6902816596571374898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760320043767646991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b15f52ff6e878d41b779ff2a61f0dfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForgeStoneIronPrismarine
+  ressource: {fileID: 507176380533051724, guid: 54ce90e550f4eea47877732a32aa4d34, type: 3}
+  timerRessource: 0.5
+  numberRessource: 1
+  timerSlider: {fileID: 5179089128947799250}
 --- !u!1 &2761750372686493624
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,7 +474,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 1, g: 0.79135954, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.3918354, b: 0.4188679, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

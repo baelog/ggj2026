@@ -10,10 +10,20 @@ using UnityEngine.UIElements;
 public class GameManager : MonoBehaviour
 {
     public int gold;
-    public int mask;
+    //public int mask;
+    public int stoneMask;
+    public int ironMask;
+    public int prismarineMask;
+    public int lightPrismarineMask;
+    public int solidifiedPrismarineMask;
     private bool build = false;
     public TMP_Text goldDisplay;
-    public TMP_Text maskDisplay;
+    //public TMP_Text maskDisplay;
+    public TMP_Text stoneMaskDisplay;
+    public TMP_Text ironMaskDisplay;
+    public TMP_Text prismarineMaskDisplay;
+    public TMP_Text lightPrismarineMaskDisplay;
+    public TMP_Text solidifiedPrismarineMaskDisplay;
 
     private Building buildingToPlace;
     private Tile builddingTile;
@@ -45,7 +55,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        gold = 100;
+        gold = 1000;
         rotation = 0;
         InitGrid();
         overlayTilemap.ClearAllTiles();
@@ -57,7 +67,14 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         goldDisplay.text = "Gold: " + gold.ToString();
-        maskDisplay.text = "Mask: " + mask.ToString();
+        //maskDisplay.text = "Mask: " + mask.ToString();
+
+        stoneMaskDisplay.text = "Stone Mask: " + stoneMask.ToString();
+        ironMaskDisplay.text = "Iron Mask: " + ironMask.ToString();
+        prismarineMaskDisplay.text = "Prismarine Mask: " + prismarineMask.ToString();
+        lightPrismarineMaskDisplay.text = "Light Prismarine Mask: " + lightPrismarineMask.ToString();
+        solidifiedPrismarineMaskDisplay.text = "solidified Prismarine Mask: " + solidifiedPrismarineMask.ToString();
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             StopPreview();
@@ -216,10 +233,25 @@ public class GameManager : MonoBehaviour
             deleteTile = false;
         }
     }
-
-    public void IncrementMask(int numberAdd)
+    public void IncrementStoneMask(int numberAdd)
     {
-        mask += numberAdd;
+        stoneMask += numberAdd;
+    }
+    public void IncrementIronMask(int numberAdd)
+    {
+        ironMask += numberAdd;
+    }
+    public void IncrementPrismarineMask(int numberAdd)
+    {
+        prismarineMask += numberAdd;
+    }
+    public void IncrementLightPrismarineMask(int numberAdd)
+    {
+        lightPrismarineMask += numberAdd;
+    }
+    public void IncrementSolidifiedPrismarineMask(int numberAdd)
+    {
+        solidifiedPrismarineMask += numberAdd;
     }
     public void IncrementGold(int numberAdd)
     {

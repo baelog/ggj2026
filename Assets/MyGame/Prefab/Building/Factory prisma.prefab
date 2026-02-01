@@ -407,10 +407,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8103429275131958825}
   - component: {fileID: 141021509785480701}
-  - component: {fileID: 6047820912368624082}
-  - component: {fileID: -5208543218416845407}
+  - component: {fileID: 4400028173532434266}
+  - component: {fileID: 8934156193148023212}
   m_Layer: 0
-  m_Name: Mines
+  m_Name: Factory prisma
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -496,7 +496,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &6047820912368624082
+--- !u!114 &4400028173532434266
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -505,15 +505,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7264709449112319007}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22aa106860c256a498aa0d06b1974fe7, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e8732e7b4954dc4b9bfebf90a4b0db3, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Mines
-  type: 2
-  timerRessource: 2
-  numberRessource: 1
+  m_EditorClassIdentifier: Assembly-CSharp::Factory
+  type: 1
+  timerMask: 2
+  numberMask: 1
   timerSlider: {fileID: 3273919581630280442}
-  ressource: {fileID: 507176380533051724, guid: bf87a28e2048b694a91bd75bfe7eda30, type: 3}
---- !u!61 &-5208543218416845407
+  ressource: {fileID: 507176380533051724, guid: 3cbd509e9af090848a57a8b06567b58c, type: 3}
+--- !u!61 &8934156193148023212
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

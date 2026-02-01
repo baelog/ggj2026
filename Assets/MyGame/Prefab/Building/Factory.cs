@@ -37,7 +37,7 @@ public class Factory : MonoBehaviour
 
             if (sliderTimer >= timerMask)
             {
-                GameManager.Instance.IncrementMask(numberMask);
+                //GameManager.Instance.IncrementMask(numberMask);
                 Vector3 position = transform.position;
                 float angle = (3.0f + (rotation * 2)) * Mathf.PI / 6;
                 position.y += Mathf.Sin(angle) * 0.6f;
