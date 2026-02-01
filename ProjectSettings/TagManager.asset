@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Item
   - Belt
+  - Building
+  - Menu
   layers:
   - Default
   - TransparentFX

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -38,6 +39,10 @@ public class GameManager : MonoBehaviour
     public int rotation;
     private bool deleteTile;
 
+    public GameObject targetUIElement;
+    public EventSystem eventSystem;
+    public GraphicRaycaster graphicRaycaster;
+
     void Start()
     {
         gold = 100;
@@ -63,7 +68,7 @@ public class GameManager : MonoBehaviour
             Vector3 worldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             worldPos.z = 0;
 
-            if (Input.GetMouseButtonDown(0) && build == false)
+            if (Input.GetMouseButtonDown(0) && !IsPointerOverUIElement(targetUIElement) && build == false)
             {
                 build = true;
             }
@@ -122,7 +127,7 @@ public class GameManager : MonoBehaviour
 
         if (build)
         {
-            if (cells[cellPos].isOccupied == buildingToPlace.placeTerrain && gold >= buildingToPlace.cost)
+            if ((cells[cellPos].isOccupied == buildingToPlace.placeTerrain || buildingToPlace.placeTerrain == 4) && gold >= buildingToPlace.cost)
             {
                 builddingTile = ScriptableObject.CreateInstance<Tile>();
                 var builddingTileTemp = buildingToPlace.GetComponent<SpriteRenderer>();
@@ -147,10 +152,13 @@ public class GameManager : MonoBehaviour
 
             ClearOverlay();
 
-            overlayTilemap.SetTile(
-                cellPos,
-                cells[cellPos].isOccupied != buildingToPlace.placeTerrain ? occupiedTile : freeTile
-            );
+            if (buildingToPlace.placeTerrain != 4)
+                overlayTilemap.SetTile(
+                    cellPos,
+                    cells[cellPos].isOccupied != buildingToPlace.placeTerrain ? occupiedTile : freeTile
+                );
+            else
+                overlayTilemap.SetTile(cellPos,freeTile);
 
             lastHoveredCell = cellPos;
             hasLastCell = true;
@@ -161,27 +169,33 @@ public class GameManager : MonoBehaviour
     {
         Vector3Int cellPos = groundTilemap.WorldToCell(worldPos);
 
+        if (Input.GetMouseButtonDown(0) && !IsPointerOverUIElement(targetUIElement) && cells[cellPos].isOccupied >= 10)
+        {
+            Collider2D hit = Physics2D.OverlapPoint(worldPos);
+
+            cells[cellPos].isOccupied -= 10;
+            buldingTilemap.SetTile(cellPos, null);
+
+            if (hit != null && (hit.CompareTag("Building") || hit.CompareTag("Belt")))
+            {
+                Destroy(hit.gameObject);
+            }
+        }
+
         if (!cells.ContainsKey(cellPos))
         {
             ClearOverlay();
             return;
         }
 
-        if (hasLastCell && cellPos == lastHoveredCell) return;
+        if (hasLastCell && cellPos == lastHoveredCell)
+        {
+            return;
+        }
 
         ClearOverlay();
 
-        if (Input.GetMouseButtonDown(0) && cells[cellPos].isOccupied <= 10)
-        {
-            Debug.Log(cells[cellPos].isOccupied);
-            cells[cellPos].isOccupied -= 10;
-            buldingTilemap.SetTile(cellPos, null);
-            Debug.Log(buldingTilemap.ToString());
-        }
-        else
-        {
-            overlayTilemap.SetTile(cellPos, occupiedTile);
-        }
+        overlayTilemap.SetTile(cellPos, occupiedTile);
 
         lastHoveredCell = cellPos;
         hasLastCell = true;
@@ -199,6 +213,7 @@ public class GameManager : MonoBehaviour
         {
             buildingToPlace = building;
             previewInstance.SetActive(true);
+            deleteTile = false;
         }
     }
 
@@ -220,5 +235,24 @@ public class GameManager : MonoBehaviour
         buildingToPlace = null;
         deleteTile = true;
         previewInstance.SetActive(false);
+    }
+
+    bool IsPointerOverUIElement(GameObject target)
+    {
+        PointerEventData pointerData = new PointerEventData(eventSystem);
+        pointerData.position = Input.mousePosition;
+
+        var results = new System.Collections.Generic.List<RaycastResult>();
+        graphicRaycaster.Raycast(pointerData, results);
+
+        foreach (RaycastResult result in results)
+        {
+            if (result.gameObject == target)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

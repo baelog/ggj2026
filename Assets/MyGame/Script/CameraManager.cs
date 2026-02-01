@@ -1,5 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class CameraManager : MonoBehaviour
 {
@@ -12,6 +14,9 @@ public class CameraManager : MonoBehaviour
     private float camHalfHeight;
     private float camHalfWidth;
 
+    public GameObject targetUIElement;
+    public EventSystem eventSystem;
+    public GraphicRaycaster graphicRaycaster;
 
     void Awake()
     {
@@ -25,9 +30,8 @@ public class CameraManager : MonoBehaviour
         Vector3 move = Vector3.zero;
 
         Vector3 mouseViewport = cam.ScreenToViewportPoint(Input.mousePosition);
-        
 
-        if (mouseViewport.x < 0 || mouseViewport.x > 1 || mouseViewport.y < 0 || mouseViewport.y > 1)
+        if (mouseViewport.x < 0 || mouseViewport.x > 1 || mouseViewport.y < 0 || mouseViewport.y > 1 || IsPointerOverUIElement(targetUIElement))
             return;
 
         if (mouseViewport.x <= edgeSize)
@@ -70,5 +74,24 @@ public class CameraManager : MonoBehaviour
         newPos.y = Mathf.Clamp(newPos.y, b.min.y + camHalfHeight, b.max.y - camHalfHeight);
 
         transform.position = newPos;
+    }
+
+    bool IsPointerOverUIElement(GameObject target)
+    {
+        PointerEventData pointerData = new PointerEventData(eventSystem);
+        pointerData.position = Input.mousePosition;
+
+        var results = new System.Collections.Generic.List<RaycastResult>();
+        graphicRaycaster.Raycast(pointerData, results);
+
+        foreach (RaycastResult result in results)
+        {
+            if (result.gameObject == target)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
