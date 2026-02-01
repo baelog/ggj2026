@@ -38,27 +38,14 @@ public class ObjectMoving : MonoBehaviour
         if (collisionCount == 0)
         {
             Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
-            rb.linearVelocity = new Vector2(0,0);
+            rb.linearVelocity = new Vector2(0, 0);
         }
     }
 
-    private float _speed = 1;
 
-    public float speed
-    {
-        set
-        {
-            this._speed = value;
-        }
+    private int _pullingBelt = 0;
 
-        get
-        {
-            return this._speed;
-        }
-    }
-    private float _pullingBelt = 0;
-
-    public float pullingBelt
+    public int pullingBelt
     {
         set
         {
@@ -71,12 +58,8 @@ public class ObjectMoving : MonoBehaviour
         }
     }
 
-    /**
-     * <summary>
-     * The 2d collision bounds
-     * </summary>
-     */
-    private Bounds _bounds;
+    public string name = "Rock";
+
 
     // Start is called before the first frame update
     private void Start()
@@ -88,88 +71,4 @@ public class ObjectMoving : MonoBehaviour
     {
     }
 
-    private void FixedUpdate()
-    {
-
-    }
-
-    /**
-     * <summary>
-     * Move left
-     * </summary>
-     *
-     * <returns>
-     * void
-     * </returns>
-     */
-    public void MoveLeft()
-    {
-        Vector3 nextPosition = new Vector3(
-            this.transform.position.x - this.speed * Time.deltaTime,
-            this.transform.position.y,
-            this.transform.position.z
-        );
-
-        this.transform.position = nextPosition;
-    }
-
-    /**
-     * <summary>
-     * Move right
-     * </summary>
-     *
-     * <returns>
-     * void
-     * </returns>
-     */
-    public void MoveRight()
-    {
-        Vector3 nextPosition = new Vector3(
-            this.transform.position.x + this.speed * Time.deltaTime,
-            this.transform.position.y,
-            this.transform.position.z
-        );
-
-        this.transform.position = nextPosition;
-    }
-
-    /**
-     * <summary>
-     * Move down
-     * </summary>
-     *
-     * <returns>
-     * void
-     * </returns>
-     */
-    public void MoveDown()
-    {
-        Vector3 nextPosition = new Vector3(
-            this.transform.position.x,
-            this.transform.position.y - this.speed * Time.deltaTime,
-            this.transform.position.z
-        );
-
-        this.transform.position = nextPosition;
-    }
-
-    /**
-     * <summary>
-     * Move up
-     * </summary>
-     *
-     * <returns>
-     * void
-     * </returns>
-     */
-    public void MoveUp()
-    {
-        Vector3 nextPosition = new Vector3(
-            this.transform.position.x,
-            this.transform.position.y + this.speed * Time.deltaTime,
-            this.transform.position.z
-        );
-
-        this.transform.position = nextPosition;
-    }
 }
