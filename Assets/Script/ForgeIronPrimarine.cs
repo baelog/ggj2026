@@ -6,6 +6,7 @@ using static UnityEditor.FilePathAttribute;
 
 public class ForgeIronPrimarine : MonoBehaviour
 {
+    public string name = "Prismarine";
     private int ironNumber = 0;
     private int prismarineNumber = 0;
     public GameObject ressource;

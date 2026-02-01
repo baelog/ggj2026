@@ -6,6 +6,7 @@ using static UnityEditor.FilePathAttribute;
 
 public class Forge : MonoBehaviour
 {
+    public string name = "Rock";
     private int rockNumber = 0;
     public GameObject ressource;
     public float timerRessource;
